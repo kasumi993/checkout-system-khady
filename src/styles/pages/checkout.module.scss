@@ -1,3 +1,14 @@
-.checkout-container {
-  margin: 5vh 0;
+.checkoutWrapper {
+  background-color: $bg-color;
+  padding: 0 7%;
+
+  .leftColumn {
+    background-color: white;
+    margin-top: 0 !important;
+  }
+
+  .rightColumn {
+    border-left: 1px solid #e9ecef;
+    margin-top: 0 !important;
+  }
 }

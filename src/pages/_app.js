@@ -1,7 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/styles.scss';
+import '@/styles/styles.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+
+import { Roboto } from 'next/font/google';
+
+// Configuration de la police Roboto
+const inter = Roboto({
+  display: 'swap',
+  weights: [400, 500, 700],
+  subsets: ['latin'],
+});
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
@@ -13,7 +22,11 @@ function MyApp({ Component, pageProps }) {
       }
     }, [router]);
   
-    return <Component {...pageProps} />;
+    return (
+      <div className={inter.className}>
+        <Component {...pageProps} />
+      </div>
+    );
   }
 
 export default MyApp;

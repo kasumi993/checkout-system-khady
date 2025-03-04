@@ -1,10 +1,9 @@
-import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 const OrderSummary = () => {
   return (
     <div className="border p-4">
-      <h4>Votre commande</h4>
+      <h4 className='fw-bold'>Votre commande</h4>
 
       {/* Produit */}
       <div className="d-flex justify-content-between mb-3">

@@ -3,14 +3,9 @@ import styles from '@/styles/components/checkout/shipping-method.module.scss';
 
 export default function ShippingMethod() {
   return (
-    <Form className={styles.form}>
-      <Form.Group controlId="formShippingMethod">
-        <Form.Label>Sélectionnez votre méthode de livraison ci-dessous</Form.Label>
-        <Form.Control as="select">
-          <option>Option 1</option>
-          <option>Option 2</option>
-        </Form.Control>
-      </Form.Group>
-    </Form>
+    <div className={styles.ShippingMethodWrapper}>
+      <div className={styles.title}> Information </div>
+      <div className={styles.text}> Selectionnez un pays pour voir les methodes d&apos;expédition disponibles</div>
+    </div>
   );
 }

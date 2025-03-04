@@ -3,12 +3,12 @@ import '@/styles/styles.scss';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { Roboto } from 'next/font/google';
+import { Lato } from 'next/font/google';
 
 // Configuration de la police Roboto
-const inter = Roboto({
+const inter = Lato({
   display: 'swap',
-  weights: [400, 500, 700],
+  weight: ['100', '300', '400', '700', '900'],
   subsets: ['latin'],
 });
 

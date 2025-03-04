@@ -1,22 +1,12 @@
-/* styles/ShippingMethod.module.scss */
-.form {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-    .form-group {
-      margin-bottom: 15px;
-  
-      label {
-        font-weight: bold;
-      }
-  
-      .form-control {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
+.ShippingMethodWrapper {
+    background-color: $section-color;
+    border-radius: 5px;
+    padding: 1rem;
+
+    .title {
+        font-weight: 600;
     }
-  }
+    .text {
+        font-weight: 500;
+    }
+}

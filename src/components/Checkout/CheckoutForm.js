@@ -26,19 +26,28 @@ export default function CheckoutForm() {
             </Row>
             <Row className='mt-4'>
               <Col>
-                <h3>Adresse de Livraison</h3>
+                <div className='mb-4'>
+                  <h3>Adresse de Livraison</h3>
+                  <span> Entrez votre adresse de livraison </span>
+                </div>
                 <ShippingAddressForm />
               </Col>
             </Row>
             <Row className="mt-4">
               <Col>
-                <h3>Méthode de Livraison</h3>
+                <div className='mb-4'>
+                  <h3>Méthode de Livraison</h3>
+                  <span> Sélectionnez votre méthode de livraison ci-dessous</span>
+                </div>
                 <ShippingMethod />
               </Col>
             </Row>
             <Row className="mt-4">
               <Col>
-                <h3>Paiement</h3>
+                <div className='mb-4'>
+                  <h3>Paiement</h3>
+                  <span> Sélectionnez votre méthode de paiement ci-dessous. Toutes les transactions sont sécurisées et crytées.</span>
+                </div>
                 <Elements stripe={stripePromise}>
                   <PaymentForm />
                 </Elements>

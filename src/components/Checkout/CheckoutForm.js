@@ -1,3 +1,5 @@
+import styles from '@/styles/components/checkout/checkout-form.module.scss';
+
 import ContactForm from '@/components/checkout/ContactForm';
 import ShippingAddressForm from '@/components/Checkout/ShippingAddressForm';
 import ShippingMethod from '@/components/Checkout/ShippingMethod';
@@ -12,28 +14,31 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function CheckoutForm() {
     return (
-        <Container>
+        <Container className={styles.CheckoutFormWrapper}>
             <Row className='mt-4'>
               <Col>
-                <h2>Contact</h2>
+                <div className='mb-4'>
+                  <h3>Contact</h3>
+                  <span> Entrez vos informations de contact </span>
+                </div>
                 <ContactForm />
               </Col>
             </Row>
             <Row className='mt-4'>
               <Col>
-                <h2>Adresse de Livraison</h2>
+                <h3>Adresse de Livraison</h3>
                 <ShippingAddressForm />
               </Col>
             </Row>
             <Row className="mt-4">
               <Col>
-                <h2>Méthode de Livraison</h2>
+                <h3>Méthode de Livraison</h3>
                 <ShippingMethod />
               </Col>
             </Row>
             <Row className="mt-4">
               <Col>
-                <h2>Paiement</h2>
+                <h3>Paiement</h3>
                 <Elements stripe={stripePromise}>
                   <PaymentForm />
                 </Elements>

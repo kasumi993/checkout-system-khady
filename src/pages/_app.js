@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/styles.scss';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -25,6 +27,7 @@ function MyApp({ Component, pageProps }) {
     return (
       <div className={inter.className}>
         <Component {...pageProps} />
+        <ToastContainer />
       </div>
     );
   }

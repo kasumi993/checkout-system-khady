@@ -1,0 +1,106 @@
+.container {
+    padding: 20px;
+
+    .content {
+        max-width: 400px;
+        margin: auto;
+    }
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin: 14px 0 10px 0;
+}
+
+.productItem {
+    display: flex;
+    align-items: start;
+    margin: 30px 0 15px 0;
+    gap: 10px;
+}
+
+
+.productDetails {
+    flex-grow: 1;
+    .productName {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+}
+
+.productSubtitle, .textMuted {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+
+.productPrice {
+font-weight: bold;
+}
+
+.discountSection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    .input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+
+        &:not(:placeholder-shown) ~ .applyButton {
+            background-color: $secondary-color;
+        }
+    }
+    
+    .applyButton {
+        padding: 8px 12px;
+        border: none;
+        background-color: #f0f0f5;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $secondary-color;
+        }
+    }
+}
+
+.summaryRow, .totalRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.totalRow {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.features {
+    margin-top: 35px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: start;
+    margin-bottom: 10px;
+}
+
+.featureIcon {
+    margin: 2px 10px 0 0;
+}
+
+.featureTitle {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.875rem;
+}
+
+.featureText {
+    font-size: 0.70rem;
+    color: #666;
+}

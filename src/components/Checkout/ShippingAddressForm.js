@@ -3,8 +3,15 @@ import { Form, Row, Col } from 'react-bootstrap';
 import styles from '@/styles/components/checkout/shipping-address-form.module.scss';
 
 
-export default function ShippingAddressForm() {
+export default function ShippingAddressForm({ selectedCountry, onCountryChange }) {
   const [countries, setCountries] = useState([]);
+
+  const handleCountryChange = (event) => {
+    const selectedCountry = countries.find(country => country.name === event.target.value);
+    onCountryChange(selectedCountry);
+
+    console.log('Pays sélectionné:', JSON.stringify(selectedCountry, null, 2))
+  };
 
   // Récupérer la liste des pays depuis l'API
   useEffect(() => {
@@ -13,10 +20,14 @@ export default function ShippingAddressForm() {
         const response = await fetch('https://restcountries.com/v3.1/all');
         const data = await response.json();
         // Extraire les noms des pays
-        const countryNames = data.map((country) => country.name.common);
+        const countriesList = data.map((country) => ({ 
+          flags: country.flags, 
+          name: country.name.common
+        }));
         // Trier les pays par ordre alphabétique
-        countryNames.sort();
-        setCountries(countryNames);
+        countriesList.sort((a, b) => a.name.localeCompare(b.name));
+        setCountries(countriesList);
+        console.log('Pays récupérés:', countriesList);
       } catch (error) {
         console.error('Erreur lors de la récupération des pays:', error);
       }
@@ -51,11 +62,11 @@ export default function ShippingAddressForm() {
       </Form.Group>
       <Form.Group className="mt-3" controlId="formCountry">
         <Form.Label>Pays</Form.Label>
-        <Form.Select aria-label="Sélectionnez un pays">
+        <Form.Select aria-label="Sélectionnez un pays" value={selectedCountry.name} onChange={handleCountryChange}>
           <option value="">Sélectionnez un pays</option>
           {countries.map((country, index) => (
-            <option key={index} value={country}>
-              {country}
+            <option key={index} value={country.name}>
+              {country.name}
             </option>
           ))}
         </Form.Select>

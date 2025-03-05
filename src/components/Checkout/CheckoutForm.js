@@ -8,11 +8,14 @@ import PaymentForm from '@/components/Checkout/PaymentForm';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useState } from 'react';
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function CheckoutForm() {
+    const [selectedCountry, setSelectedCountry] = useState({ name:'France', flags: { png: "https://flagcdn.com/w320/fr.png" }});
+
     return (
         <Container className={styles.CheckoutFormWrapper}>
             <Row className='mt-4'>
@@ -30,7 +33,7 @@ export default function CheckoutForm() {
                   <h3>Adresse de Livraison</h3>
                   <span> Entrez votre adresse de livraison </span>
                 </div>
-                <ShippingAddressForm />
+                <ShippingAddressForm selectedCountry={selectedCountry} onCountryChange={setSelectedCountry}/>
               </Col>
             </Row>
             <Row className="mt-4">
@@ -49,7 +52,7 @@ export default function CheckoutForm() {
                   <span> Sélectionnez votre méthode de paiement ci-dessous. Toutes les transactions sont sécurisées et crytées.</span>
                 </div>
                 <Elements stripe={stripePromise}>
-                  <PaymentForm />
+                  <PaymentForm selectedCountry={selectedCountry}/>
                 </Elements>
               </Col>
             </Row>

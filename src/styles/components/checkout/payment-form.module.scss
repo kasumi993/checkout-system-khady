@@ -1,31 +1,77 @@
-/* styles/PaymentForm.module.scss */
-.form {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-    .cardElement {
-      margin-bottom: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: white;
-    }
-  
-    .button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-  
-      &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-      }
-    }
-  }
+.paymentFormWrapper {
+  border: 1px solid #d4a373;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.paymentMethod {
+  border: 1px solid #d4a373;
+  background: #f5f5f5;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.paymentMethodName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: bold;
+}
+
+.cardDetails {
+  margin-top: 15px;
+}
+
+.cardInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+
+.cardInput {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  background: white;
+  width: 100%;
+}
+
+.cardExtraInfo {
+}
+
+.inputGroup {
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.button {
+  margin-top: 15px;
+  background: #d4a373;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.securityMessage {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}

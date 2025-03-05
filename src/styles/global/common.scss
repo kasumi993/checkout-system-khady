@@ -10,3 +10,36 @@ body {
   box-sizing: border-box;
   background-color: $bg-color;
 }
+
+$radio-checkbox-size: 15px;
+
+.radio-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $radio-checkbox-size;
+  height: $radio-checkbox-size;
+  border: 2px solid #aaa; // Default border color
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: calc($radio-checkbox-size - 7px); // Inner circle size
+    height: calc($radio-checkbox-size - 7px);
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  &.active {
+    border-color: $secondary-color; // Active border color
+
+    &::before {
+      background-color: $secondary-color; // Active inner circle color
+    }
+  }
+}

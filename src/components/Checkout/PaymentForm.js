@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button } from 'react-bootstrap';
 import styles from '@/styles/components/checkout/payment-form.module.scss';
 
@@ -14,11 +14,11 @@ export default function PaymentForm({ selectedCountry }) {
       return;
     }
 
-    const cardElement = elements.getElement(CardElement);
+    const cardNumberElement = elements.getElement(CardNumberElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement,
+      card: cardNumberElement,
     });
 
     if (error) {
@@ -31,33 +31,53 @@ export default function PaymentForm({ selectedCountry }) {
   return (
     <div className={styles.paymentFormWrapper}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.paymentMethod}>
-          <label>
-            <input type="radio" name="paymentMethod" value="creditCard" defaultChecked />
-            Carte de crédit
-          </label>
-        </div>
-
-        <div className={styles.cardDetails}>
-          <label>Numéro de carte</label>
-          <div className={styles.cardInputWrapper}>
-            <Image
-              src={selectedCountry.flags.png} // Affiche le drapeau du pays sélectionné
-              alt={`Drapeau ${selectedCountry.name}`}
-              width={24}
-              height={18}
-              className={styles.flagIcon}
-            />
-            <CardElement className={styles.cardElement} />
+        <div className={styles.paymentFormContainer}>
+          <div className={styles.paymentMethod}>
+            <div className={styles.paymentMethodName}>
+              <div>
+                <Image src="/credit-card.png" alt="Credit Card" width={24} height={24} />
+                <span className='ms-2'>Carte de crédit</span>
+              </div>
+              <div className="radio-checkbox active"> </div>
+            </div>
+          </div>
+          <div className={styles.cardDetails}>
+              <label>Numéro de carte</label>
+              <div className={styles.cardInputWrapper}>
+                <Image
+                  src={selectedCountry.flags.png}
+                  alt={`Drapeau ${selectedCountry.name}`}
+                  width={24}
+                  height={18}
+                  className={styles.flagIcon}
+                />
+                <CardNumberElement className={styles.cardInput} />
+              </div>
+              <div className='d-flex gap-2 w-100 mt-4'>
+                <div className={`${styles.cardInputWrapper}`}>
+                  <label>
+                    Date d'exp
+                    <CardExpiryElement className={styles.cardInput} />
+                  </label>
+                </div>
+                <div className={`${styles.cardInputWrapper}`}>
+                  <label>
+                    CVC/CVV
+                    <CardCvcElement className={styles.cardInput} />
+                  </label>
+                </div>
+              </div>
           </div>
         </div>
-
+      
         <Button type="submit" disabled={!stripe} className={styles.button}>
           Payer
         </Button>
       </form>
 
-      <p className={styles.securityMessage}>Toutes les transactions sont sécurisées et cryptées.</p>
+      <p className={styles.securityMessage}>
+        Toutes les transactions sont sécurisées et cryptées.
+      </p>
     </div>
   );
 }

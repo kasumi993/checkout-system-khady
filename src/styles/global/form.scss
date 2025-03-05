@@ -14,7 +14,7 @@ form {
     }
   }
 
-  .form-check-input {
+  .form-check-input, .form-radio-input {
     &:focus {
       border-color: $secondary-color;
       outline: 0;

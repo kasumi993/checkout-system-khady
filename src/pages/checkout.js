@@ -15,12 +15,12 @@ export default function Checkout() {
       <div className={styles.checkoutWrapper}>
         <Row className="g-4">
           {/* Left Column */}
-          <Col md={8} className={styles.leftColumn}>
+          <Col md={7} className={styles.leftColumn}>
             <CheckoutForm />
           </Col>
 
           {/* Right Column */}
-          <Col md={4} className={styles.rightColumn}>
+          <Col md={5} className={styles.rightColumn}>
             <OrderSummary />
           </Col>
         </Row>

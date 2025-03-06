@@ -2,7 +2,7 @@
 
 This project is a checkout page implementation using Next.js, React.js, and Bootstrap with Stripe payment integration in sandbox mode.
 
-![Checkout Page Screenshot](https://github.com/kasumi993/quoteit-front/assets/42519251/90bd63e3-2a40-46f9-a1e4-3217ed8b0a87)
+![Checkout Page Screenshot](public/interface/interface.png)
 
 ## Table of Contents
 

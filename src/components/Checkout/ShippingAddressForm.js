@@ -9,8 +9,6 @@ export default function ShippingAddressForm({ selectedCountry, onCountryChange }
   const handleCountryChange = (event) => {
     const selectedCountry = countries.find(country => country.name === event.target.value);
     onCountryChange(selectedCountry);
-
-    console.log('Pays sélectionné:', JSON.stringify(selectedCountry, null, 2))
   };
 
   // Récupérer la liste des pays depuis l'API
@@ -27,7 +25,6 @@ export default function ShippingAddressForm({ selectedCountry, onCountryChange }
         // Trier les pays par ordre alphabétique
         countriesList.sort((a, b) => a.name.localeCompare(b.name));
         setCountries(countriesList);
-        console.log('Pays récupérés:', countriesList);
       } catch (error) {
         console.error('Erreur lors de la récupération des pays:', error);
       }

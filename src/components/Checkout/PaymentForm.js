@@ -1,13 +1,14 @@
-import Image from 'next/image';
-import { FaLock } from 'react-icons/fa';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { Button } from 'react-bootstrap';
+import { FaLock } from 'react-icons/fa';
+import Image from 'next/image';
 import styles from '@/styles/components/checkout/payment-form.module.scss';
+import { createPaymentIntent } from '@/services/paymentService';
 
-export default function PaymentForm({ selectedCountry }) {
+export default function PaymentForm({ selectedCountry, paymentAmount }) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -21,27 +22,37 @@ export default function PaymentForm({ selectedCountry }) {
       return;
     }
 
-    // Créer un PaymentIntent côté serveur
-    const { clientSecret } = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => res.json());
+    try {
+      // Créer un paiement intent coté serveur
+      const { clientSecret } = await createPaymentIntent(paymentAmount);
 
-    // Confirmer le paiement côté client
-    const cardNumberElement = elements.getElement(CardNumberElement);
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardNumberElement,
-      },
-    });
+      // Confirmer le paiement côté client
+      const cardNumberElement = elements.getElement(CardNumberElement);
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardNumberElement,
+        },
+      });
 
-    setLoading(false);
+      setLoading(false);
 
-    if (error) {
-      // Afficher un message toast en cas d'erreur
-      toast.error(error.message, {
+
+      if (error) {
+        toast.error(error.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else if (paymentIntent.status === 'succeeded') {
+        router.push('/success');
+      }
+    } catch (error) {
+      setLoading(false);
+      const message = error.message || 'Le paiement a échoué. Veuillez réessayer.';
+      toast.error(message, {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -49,9 +60,6 @@ export default function PaymentForm({ selectedCountry }) {
         pauseOnHover: true,
         draggable: true,
       });
-    } else if (paymentIntent.status === 'succeeded') {
-      // Rediriger vers une page de succès
-      router.push('/success');
     }
   };
 
@@ -61,8 +69,8 @@ export default function PaymentForm({ selectedCountry }) {
         <div className={styles.paymentFormContainer}>
           <div className={styles.paymentMethod}>
             <div>
-                <Image src="/credit-card.png" alt="Credit Card" width={24} height={24} />
-                <span className={`ms-2 ${styles.paymentMethodName}`}>Carte de crédit</span>
+              <Image src="/credit-card.png" alt="Credit Card" width={24} height={24} />
+              <span className={`ms-2 ${styles.paymentMethodName}`}>Carte de crédit</span>
             </div>
             <div className="radio-checkbox active"> </div>
           </div>
@@ -81,21 +89,21 @@ export default function PaymentForm({ selectedCountry }) {
               </div>
             </div>
             <div className='d-flex gap-2 w-100 mt-3'>
-                <div className='w-50'>
-                  <label>Date d&apos;exp</label>
-                  <CardExpiryElement className={styles.cardInput} />
-                </div>
-                <div className='w-50'>
-                  <label>CVC/CVV</label>
-                  <CardCvcElement className={styles.cardInput} />
-                </div>
+              <div className='w-50'>
+                <label>Date d&apos;exp</label>
+                <CardExpiryElement className={styles.cardInput} />
+              </div>
+              <div className='w-50'>
+                <label>CVC/CVV</label>
+                <CardCvcElement className={styles.cardInput} />
+              </div>
             </div>
           </div>
         </div>
-      
-        <Button type="submit" disabled={!stripe} className={styles.button}>
+
+        <Button type="submit" disabled={!stripe || loading} className={styles.button}>
           <FaLock size={15} />
-          Payer
+          {loading ? 'Paiement en cours...' : 'Payer'}
         </Button>
       </form>
 

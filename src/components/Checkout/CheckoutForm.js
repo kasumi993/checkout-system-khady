@@ -52,7 +52,7 @@ export default function CheckoutForm() {
                   <span> Sélectionnez votre méthode de paiement ci-dessous. Toutes les transactions sont sécurisées et crytées.</span>
                 </div>
                 <Elements stripe={stripePromise}>
-                  <PaymentForm selectedCountry={selectedCountry}/>
+                  <PaymentForm selectedCountry={selectedCountry} paymentAmount = {3990}/>
                 </Elements>
               </Col>
             </Row>

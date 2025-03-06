@@ -1,6 +1,6 @@
 import styles from '@/styles/components/checkout/checkout-form.module.scss';
 
-import ContactForm from '@/components/checkout/ContactForm';
+import ContactForm from '@/components/Checkout/ContactForm';
 import ShippingAddressForm from '@/components/Checkout/ShippingAddressForm';
 import ShippingMethod from '@/components/Checkout/ShippingMethod';
 import PaymentForm from '@/components/Checkout/PaymentForm';

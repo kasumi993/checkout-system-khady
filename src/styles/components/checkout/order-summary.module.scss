@@ -1,5 +1,8 @@
 .container {
     padding: 20px;
+    @include media-breakpoint-up(md) {
+        position: fixed;
+    }
 
     .content {
         max-width: 400px;

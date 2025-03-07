@@ -1,6 +1,7 @@
 # Checkout System with Stripe Integration
 
 This project is a checkout page implementation using Next.js, React.js, and Bootstrap with Stripe payment integration in sandbox mode.
+You can follow this link to test: [vercel link](https://checkout-system-k.vercel.app/checkout)
 
 ![Checkout Page Screenshot](public/interface/interface.png)
 
